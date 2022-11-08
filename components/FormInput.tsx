@@ -27,7 +27,7 @@ const FormInput = (props: FormInputProps) => {
     event: NativeSyntheticEvent<TextInputChangeEventData>,
   ) => {
     const newValue = event.nativeEvent.text;
-    const isValid = type === 'number' ? /^\d+$/.test(newValue) : true;
+    const isValid = type === 'number' ? /^[0-9]*$/.test(newValue) : true;
     if (isValid) handleFormChange(newValue, inputName);
   };
 
