@@ -40,14 +40,16 @@ const Form = () => {
         </View>
       )}
       <View>
-        {dummy_data.map((data: FormInputData) => (
-          <FormInput
-            key={data.name}
-            data={data}
-            value={inputsValue[data.name].value}
-            handleFormChange={handleFormChange}
-          />
-        ))}
+        {dummy_data.map((data: FormInputData) => {
+          return (
+            <FormInput
+              key={data.name}
+              data={data}
+              value={inputsValue[data.name]}
+              handleFormChange={handleFormChange}
+            />
+          );
+        })}
       </View>
       <Button title={'Submit'} onPress={handleSubmit}></Button>
     </View>

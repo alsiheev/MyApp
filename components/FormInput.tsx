@@ -1,4 +1,3 @@
-import {useState} from 'react';
 import {
   NativeSyntheticEvent,
   StyleSheet,
@@ -29,7 +28,7 @@ const FormInput = (props: FormInputProps) => {
   ) => {
     const newValue = event.nativeEvent.text;
     const isValid = type === 'number' ? /^\d+$/.test(newValue) : true;
-    isValid && handleFormChange(newValue, inputName);
+    if (isValid) handleFormChange(newValue, inputName);
   };
 
   return (
