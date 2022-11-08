@@ -1,5 +1,12 @@
 import {useState} from 'react';
-import {Button, StyleSheet, Text, View} from 'react-native';
+import {
+  Button,
+  Keyboard,
+  StyleSheet,
+  Text,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
 import FormInput from './FormInput';
 import dummy_data from '../utils/dummy_data';
 import {FormInputData} from './FormInput';
@@ -31,34 +38,43 @@ const Form = () => {
   };
 
   return (
-    <View style={styles.container}>
-      {showValues && (
+    <TouchableWithoutFeedback
+      onPress={() => Keyboard.dismiss()}
+      style={{flex: 1}}>
+      <View style={styles.container}>
         <View>
-          <Text>{inputsValue.value}</Text>
-          <Text>{inputsValue.value2}</Text>
-          <Text>{inputsValue.value3}</Text>
+          {showValues && (
+            <View>
+              <Text>{inputsValue.value}</Text>
+              <Text>{inputsValue.value2}</Text>
+              <Text>{inputsValue.value3}</Text>
+            </View>
+          )}
         </View>
-      )}
-      <View>
-        {dummy_data.map((data: FormInputData) => {
-          return (
-            <FormInput
-              key={data.name}
-              data={data}
-              value={inputsValue[data.name]}
-              handleFormChange={handleFormChange}
-            />
-          );
-        })}
+        <View>
+          <View>
+            {dummy_data.map((data: FormInputData) => {
+              return (
+                <FormInput
+                  key={data.name}
+                  data={data}
+                  value={inputsValue[data.name]}
+                  handleFormChange={handleFormChange}
+                />
+              );
+            })}
+          </View>
+          <Button title={'Submit'} onPress={handleSubmit}></Button>
+        </View>
       </View>
-      <Button title={'Submit'} onPress={handleSubmit}></Button>
-    </View>
+    </TouchableWithoutFeedback>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     padding: 10,
+    height: '100%',
   },
 });
 
